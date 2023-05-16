@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://cujmpnoevmsww"]
+
+[ext_resource type="FontFile" uid="uid://wockb0vr3owd" path="res://fonts/smallest_pixel_7/smallest_pixel-7.ttf" id="1_8gkc2"]
+[ext_resource type="Texture2D" uid="uid://ds2jr760hvn8p" path="res://icon.svg" id="2_rcm7m"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="GameTimer" type="Timer" parent="."]
+
+[node name="InteractionText" type="RichTextLabel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.0
+offset_top = -33.0
+offset_right = 343.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("1_8gkc2")
+theme_override_font_sizes/normal_font_size = 64
+text = "Press e To USE"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="PlayerCityHealth" type="Sprite2D" parent="Control"]
+position = Vector2(65, 64)
+texture = ExtResource("2_rcm7m")
+
+[node name="TimerText" type="RichTextLabel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -145.0
+offset_bottom = 65.0
+grow_horizontal = 0
+theme_override_fonts/normal_font = ExtResource("1_8gkc2")
+theme_override_font_sizes/normal_font_size = 64
+text = "0:00"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="AttackButton" type="Sprite2D" parent="HBoxContainer"]
+position = Vector2(728, 78)
+texture = ExtResource("2_rcm7m")
+
+[node name="BlockButton" type="Sprite2D" parent="HBoxContainer"]
+position = Vector2(576, 78)
+texture = ExtResource("2_rcm7m")
+
+[node name="ChargeButton" type="Sprite2D" parent="HBoxContainer"]
+position = Vector2(424, 78)
+texture = ExtResource("2_rcm7m")
