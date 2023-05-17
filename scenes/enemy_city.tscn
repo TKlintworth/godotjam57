@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dj1menmgufjgr"]
+
+[ext_resource type="Script" path="res://EnemyCity.gd" id="1_cbj5d"]
+[ext_resource type="Texture2D" uid="uid://dyty5blga2fna" path="res://assets/sprites/base_t1_enemy_75x102.png" id="2_hp7ex"]
+[ext_resource type="Texture2D" uid="uid://cpwdyeto35qt5" path="res://assets/sprites/base_t2_enemy_79x105.png" id="3_ekw14"]
+[ext_resource type="Texture2D" uid="uid://dmg66n4y6ggkk" path="res://assets/sprites/base_t3_enemy_79x115.png" id="4_we0rr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0wb53"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hp7ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ekw14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_we0rr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujp4w"]
+size = Vector2(83, 72)
+
+[node name="EnemyCity" type="Node2D"]
+script = ExtResource("1_cbj5d")
+
+[node name="EnemyCitySpriteFrames" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0wb53")
+
+[node name="EnemyCityCollisionBox" type="Area2D" parent="EnemyCitySpriteFrames"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCitySpriteFrames/EnemyCityCollisionBox"]
+position = Vector2(0.5, -14)
+shape = SubResource("RectangleShape2D_ujp4w")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="LevelUpTimer" type="Timer" parent="."]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb2l5yaudmcuo"
-path="res://.godot/imported/player_45x41.png-a3ebe4b32a3dc8a837f55ae6aa5271a4.ctex"
+uid="uid://bb3x6mmx1ineu"
+path="res://.godot/imported/enemy_t1_walk.png-0237e555b79181f246e410fd99f7981a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player_45x41.png"
-dest_files=["res://.godot/imported/player_45x41.png-a3ebe4b32a3dc8a837f55ae6aa5271a4.ctex"]
+source_file="res://assets/sprites/enemy_t1_walk.png"
+dest_files=["res://.godot/imported/enemy_t1_walk.png-0237e555b79181f246e410fd99f7981a.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

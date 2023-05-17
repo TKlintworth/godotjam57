@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn23ewdkpgrb0"]
+
+[ext_resource type="Texture2D" uid="uid://bufiwfljvp5lt" path="res://assets/sprites/base_t1_player_75x102.png" id="1_feqia"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hihl7"]
+size = Vector2(81, 69)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ht0uh"]
+radius = 151.03
+
+[node name="PlayerCity" type="Node2D"]
+
+[node name="PlayerCitySprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_feqia")
+
+[node name="PlayerCityCollisionBox" type="Area2D" parent="PlayerCitySprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCitySprite/PlayerCityCollisionBox"]
+position = Vector2(-0.5, -13.5)
+shape = SubResource("RectangleShape2D_hihl7")
+
+[node name="PlayerCityHealingRadius" type="Area2D" parent="PlayerCitySprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCitySprite/PlayerCityHealingRadius"]
+shape = SubResource("CircleShape2D_ht0uh")

@@ -1,15 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccf48470vagbm"]
+[gd_scene load_steps=6 format=3 uid="uid://ccf48470vagbm"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_t6goj"]
-[ext_resource type="Texture2D" uid="uid://ds2jr760hvn8p" path="res://icon.svg" id="2_fgaxv"]
+[ext_resource type="Texture2D" uid="uid://bb2l5yaudmcuo" path="res://assets/sprites/player_45x41.png" id="2_4w1ri"]
+[ext_resource type="Texture2D" uid="uid://deftmjenrt1wm" path="res://assets/sprites/healthbar_red_18x2.png" id="3_eredy"]
+[ext_resource type="Texture2D" uid="uid://buc5kvp7pvi6l" path="res://assets/sprites/healthbar_green_18x2.png" id="4_456pr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfpku"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_vpli7"]
+radius = 16.0
 
-[node name="Node2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_t6goj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_xfpku")
+[node name="PlayerCollisionBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vpli7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_fgaxv")
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture_filter = 5
+texture = ExtResource("2_4w1ri")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+zoom = Vector2(3.25, 3.25)
+
+[node name="PlayerHealthBar" type="Node2D" parent="."]
+position = Vector2(0, -21)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="PlayerHealthBar"]
+offset_left = -9.0
+offset_top = -1.0
+offset_right = 9.0
+offset_bottom = 1.0
+value = 100.0
+rounded = true
+texture_under = ExtResource("4_456pr")
+texture_progress = ExtResource("3_eredy")
