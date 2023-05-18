@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://2ssi5a7shh8x"]
+
+[ext_resource type="Texture2D" uid="uid://dot44sy00gsqo" path="res://assets/sprites/enemy_51x42.png" id="1_gylmc"]
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_uo80s"]
+[ext_resource type="Texture2D" uid="uid://buc5kvp7pvi6l" path="res://assets/sprites/healthbar_green_18x2.png" id="3_h5ed5"]
+[ext_resource type="Texture2D" uid="uid://deftmjenrt1wm" path="res://assets/sprites/healthbar_red_18x2.png" id="4_j1e7w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l3qsf"]
+radius = 20.0
+
+[node name="Enemy" type="Node2D"]
+position = Vector2(110, 62)
+script = ExtResource("1_uo80s")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_gylmc")
+
+[node name="EnemyArea" type="Area2D" parent="."]
+
+[node name="EnemyCollisionBox" type="CollisionShape2D" parent="EnemyArea"]
+shape = SubResource("CircleShape2D_l3qsf")
+
+[node name="EnemyHealthBar" type="Node2D" parent="."]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="EnemyHealthBar"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -9.0
+offset_top = -20.0
+offset_right = 9.0
+offset_bottom = -18.0
+grow_horizontal = 2
+value = 100.0
+texture_under = ExtResource("3_h5ed5")
+texture_progress = ExtResource("4_j1e7w")

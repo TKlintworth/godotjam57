@@ -1,12 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwt8dtpyms8ni"]
+[gd_scene load_steps=8 format=3 uid="uid://cwt8dtpyms8ni"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_c6ctr"]
 [ext_resource type="PackedScene" uid="uid://cujmpnoevmsww" path="res://scenes/hud.tscn" id="2_17vk3"]
 [ext_resource type="PackedScene" uid="uid://dbolelolv8154" path="res://scenes/world.tscn" id="3_6ai0o"]
+[ext_resource type="PackedScene" uid="uid://ccf48470vagbm" path="res://scenes/player.tscn" id="4_cwdue"]
+[ext_resource type="PackedScene" uid="uid://2ssi5a7shh8x" path="res://scenes/enemy.tscn" id="5_67u1y"]
+[ext_resource type="PackedScene" uid="uid://dn23ewdkpgrb0" path="res://scenes/player_city.tscn" id="6_lsadw"]
+[ext_resource type="PackedScene" uid="uid://dj1menmgufjgr" path="res://scenes/enemy_city.tscn" id="7_57t1n"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_c6ctr")
 
 [node name="HUD" parent="." instance=ExtResource("2_17vk3")]
 
 [node name="World" parent="." instance=ExtResource("3_6ai0o")]
+
+[node name="Player" parent="." instance=ExtResource("4_cwdue")]
+texture_filter = 1
+position = Vector2(560, 152)
+
+[node name="Enemy" parent="." instance=ExtResource("5_67u1y")]
+z_index = 10
+position = Vector2(408, 72)
+
+[node name="PlayerCity" parent="." instance=ExtResource("6_lsadw")]
+position = Vector2(504, 280)
+
+[node name="EnemyCity" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(80, 208)
