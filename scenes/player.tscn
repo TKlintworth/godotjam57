@@ -1,35 +1,194 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccf48470vagbm"]
+[gd_scene load_steps=25 format=3 uid="uid://ccf48470vagbm"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_t6goj"]
-[ext_resource type="Texture2D" uid="uid://bb2l5yaudmcuo" path="res://assets/sprites/player_45x41.png" id="2_4w1ri"]
-[ext_resource type="Texture2D" uid="uid://deftmjenrt1wm" path="res://assets/sprites/healthbar_red_18x2.png" id="3_eredy"]
-[ext_resource type="Texture2D" uid="uid://buc5kvp7pvi6l" path="res://assets/sprites/healthbar_green_18x2.png" id="4_456pr"]
+[ext_resource type="Texture2D" uid="uid://daqhgxoneojqd" path="res://assets/sprites/player_attack.png" id="2_r2fxs"]
+[ext_resource type="Texture2D" uid="uid://dxpwtnwxjkpkm" path="res://assets/sprites/player_walk.png" id="3_2siep"]
+[ext_resource type="PackedScene" uid="uid://bjylum348rl4h" path="res://scenes/health.tscn" id="4_tfvk5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vpli7"]
 radius = 16.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbdfe"]
+atlas = ExtResource("2_r2fxs")
+region = Rect2(0, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tf7mk"]
+atlas = ExtResource("2_r2fxs")
+region = Rect2(45, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdtep"]
+atlas = ExtResource("2_r2fxs")
+region = Rect2(90, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkpvd"]
+atlas = ExtResource("2_r2fxs")
+region = Rect2(135, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqxok"]
+atlas = ExtResource("2_r2fxs")
+region = Rect2(180, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e182o"]
+atlas = ExtResource("2_r2fxs")
+region = Rect2(225, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqqdu"]
+atlas = ExtResource("2_r2fxs")
+region = Rect2(270, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bof1f"]
+atlas = ExtResource("3_2siep")
+region = Rect2(0, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3eg7h"]
+atlas = ExtResource("3_2siep")
+region = Rect2(45, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmnn3"]
+atlas = ExtResource("3_2siep")
+region = Rect2(0, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqipr"]
+atlas = ExtResource("3_2siep")
+region = Rect2(45, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfgsc"]
+atlas = ExtResource("3_2siep")
+region = Rect2(90, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdl21"]
+atlas = ExtResource("3_2siep")
+region = Rect2(135, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wimjk"]
+atlas = ExtResource("3_2siep")
+region = Rect2(180, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdjvm"]
+atlas = ExtResource("3_2siep")
+region = Rect2(225, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8iw8"]
+atlas = ExtResource("3_2siep")
+region = Rect2(270, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya18y"]
+atlas = ExtResource("3_2siep")
+region = Rect2(315, 0, 45, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4l5vr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbdfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tf7mk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdtep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkpvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqxok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e182o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqqdu")
+}],
+"loop": false,
+"name": &"player_attack",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bof1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3eg7h")
+}],
+"loop": false,
+"name": &"player_idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmnn3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqipr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfgsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdl21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wimjk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdjvm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8iw8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ya18y")
+}],
+"loop": false,
+"name": &"player_walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5bl76"]
+height = 24.359
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_t6goj")
 
-[node name="PlayerCollisionBox" type="CollisionShape2D" parent="."]
+[node name="PlayerCollisionBox" type="CollisionShape2D" parent="." groups=["hurtbox"]]
 shape = SubResource("CircleShape2D_vpli7")
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-texture_filter = 5
-texture = ExtResource("2_4w1ri")
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_4l5vr")
+animation = &"player_attack"
+frame = 6
+flip_h = true
+
+[node name="PlayerAttackBox" type="Area2D" parent="PlayerSprite"]
+
+[node name="PlayerAttackBoxRight" type="CollisionShape2D" parent="PlayerSprite/PlayerAttackBox"]
+position = Vector2(7, -5)
+rotation = 1.5708
+scale = Vector2(0.639999, 1.56)
+shape = SubResource("CapsuleShape2D_5bl76")
+disabled = true
+
+[node name="PlayerAttackBoxLeft" type="CollisionShape2D" parent="PlayerSprite/PlayerAttackBox"]
+position = Vector2(-7, -5)
+rotation = 1.5708
+scale = Vector2(0.639999, 1.56)
+shape = SubResource("CapsuleShape2D_5bl76")
+disabled = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(3.25, 3.25)
 
-[node name="PlayerHealthBar" type="Node2D" parent="."]
-position = Vector2(0, -21)
+[node name="Health" parent="." instance=ExtResource("4_tfvk5")]
+position = Vector2(-9, -18)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="PlayerHealthBar"]
-offset_left = -9.0
-offset_top = -1.0
-offset_right = 9.0
-offset_bottom = 1.0
-value = 100.0
-rounded = true
-texture_under = ExtResource("4_456pr")
-texture_progress = ExtResource("3_eredy")
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="BlockTimer" type="Timer" parent="."]
+
+[node name="ChargeTimer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="PlayerSprite" to="." method="_on_player_sprite_animation_finished"]
+[connection signal="area_entered" from="PlayerSprite/PlayerAttackBox" to="." method="_on_player_attack_box_area_entered"]
+[connection signal="dead" from="Health" to="." method="_on_health_dead"]

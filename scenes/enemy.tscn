@@ -1,9 +1,61 @@
-[gd_scene load_steps=6 format=3 uid="uid://2ssi5a7shh8x"]
+[gd_scene load_steps=13 format=3 uid="uid://2ssi5a7shh8x"]
 
-[ext_resource type="Texture2D" uid="uid://dot44sy00gsqo" path="res://assets/sprites/enemy_51x42.png" id="1_gylmc"]
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="1_uo80s"]
-[ext_resource type="Texture2D" uid="uid://buc5kvp7pvi6l" path="res://assets/sprites/healthbar_green_18x2.png" id="3_h5ed5"]
-[ext_resource type="Texture2D" uid="uid://deftmjenrt1wm" path="res://assets/sprites/healthbar_red_18x2.png" id="4_j1e7w"]
+[ext_resource type="Texture2D" uid="uid://bb3x6mmx1ineu" path="res://assets/sprites/enemy_t1_walk.png" id="2_p0qql"]
+[ext_resource type="PackedScene" uid="uid://bjylum348rl4h" path="res://scenes/health.tscn" id="3_b1we5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ew6cs"]
+atlas = ExtResource("2_p0qql")
+region = Rect2(0, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63a2l"]
+atlas = ExtResource("2_p0qql")
+region = Rect2(45, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn0tm"]
+atlas = ExtResource("2_p0qql")
+region = Rect2(90, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evgtn"]
+atlas = ExtResource("2_p0qql")
+region = Rect2(135, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efha4"]
+atlas = ExtResource("2_p0qql")
+region = Rect2(180, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8pwf"]
+atlas = ExtResource("2_p0qql")
+region = Rect2(225, 0, 45, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d3c16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ew6cs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63a2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tn0tm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evgtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efha4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8pwf")
+}],
+"loop": false,
+"name": &"enemy_walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eijy1"]
+radius = 17.593
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l3qsf"]
 radius = 20.0
@@ -12,25 +64,31 @@ radius = 20.0
 position = Vector2(110, 62)
 script = ExtResource("1_uo80s")
 
-[node name="EnemySprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_gylmc")
+[node name="EnemySprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_d3c16")
+animation = &"enemy_walk"
 
-[node name="EnemyArea" type="Area2D" parent="."]
+[node name="DetectionArea" type="Area2D" parent="EnemySprite"]
 
-[node name="EnemyCollisionBox" type="CollisionShape2D" parent="EnemyArea"]
+[node name="DetectionAreaCollisionBox" type="CollisionShape2D" parent="EnemySprite/DetectionArea"]
+scale = Vector2(5.17297, -4.30917)
+shape = SubResource("CircleShape2D_eijy1")
+
+[node name="EnemyArea" type="Area2D" parent="." groups=["hurtbox"]]
+
+[node name="EnemyCollisionBox" type="CollisionShape2D" parent="EnemyArea" groups=["hurtbox"]]
 shape = SubResource("CircleShape2D_l3qsf")
 
-[node name="EnemyHealthBar" type="Node2D" parent="."]
+[node name="Health" parent="." instance=ExtResource("3_b1we5")]
+position = Vector2(-9, -20)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="EnemyHealthBar"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -9.0
-offset_top = -20.0
-offset_right = 9.0
-offset_bottom = -18.0
-grow_horizontal = 2
-value = 100.0
-texture_under = ExtResource("3_h5ed5")
-texture_progress = ExtResource("4_j1e7w")
+[node name="AttackTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="EnemySprite/DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="EnemySprite/DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="area_entered" from="EnemyArea" to="." method="_on_enemy_area_area_entered"]
+[connection signal="area_exited" from="EnemyArea" to="." method="_on_enemy_area_area_exited"]
+[connection signal="body_entered" from="EnemyArea" to="." method="_on_enemy_area_body_entered"]
+[connection signal="dead" from="Health" to="." method="_on_health_dead"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

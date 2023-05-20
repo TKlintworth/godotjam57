@@ -1,14 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cujmpnoevmsww"]
+[gd_scene load_steps=7 format=3 uid="uid://cujmpnoevmsww"]
 
 [ext_resource type="Script" path="res://scenes/hud.gd" id="1_1qktu"]
 [ext_resource type="FontFile" uid="uid://wockb0vr3owd" path="res://fonts/smallest_pixel_7/smallest_pixel-7.ttf" id="1_8gkc2"]
 [ext_resource type="Texture2D" uid="uid://ds2jr760hvn8p" path="res://icon.svg" id="2_rcm7m"]
+[ext_resource type="Texture2D" uid="uid://bufiwfljvp5lt" path="res://assets/sprites/base_t1_player_75x102.png" id="3_i4tbk"]
+[ext_resource type="Texture2D" uid="uid://de3bddwsfxx7p" path="res://assets/sprites/base_t1_player_black_75x69.png" id="4_2cdbk"]
+[ext_resource type="Texture2D" uid="uid://dig3eurdj3ton" path="res://assets/sprites/base_t1_player_no_shadow_75x69.png" id="5_v6kai"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_1qktu")
-
-[node name="GameTimer" type="Timer" parent="."]
-wait_time = 600.0
 
 [node name="InteractionText" type="RichTextLabel" parent="."]
 visible = false
@@ -31,20 +31,37 @@ text = "Press e To USE"
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="PlayerCityHealth" type="Sprite2D" parent="Control"]
-position = Vector2(65, 64)
-texture = ExtResource("2_rcm7m")
+visible = false
+position = Vector2(48, 56)
+texture = ExtResource("3_i4tbk")
 
-[node name="TimerText" type="RichTextLabel" parent="."]
+[node name="PlayerCityHealthBar" type="TextureProgressBar" parent="Control"]
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 83.0
+offset_bottom = 118.0
+scale = Vector2(2.12, 2)
+value = 100.0
+rounded = true
+allow_greater = true
+fill_mode = 3
+texture_under = ExtResource("4_2cdbk")
+texture_progress = ExtResource("5_v6kai")
+
+[node name="TimerText" type="Label" parent="."]
+texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -145.0
 offset_bottom = 65.0
 grow_horizontal = 0
-theme_override_fonts/normal_font = ExtResource("1_8gkc2")
-theme_override_font_sizes/normal_font_size = 64
+theme_override_fonts/font = ExtResource("1_8gkc2")
+theme_override_font_sizes/font_size = 60
 text = "0:00"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -61,10 +78,73 @@ alignment = 1
 position = Vector2(728, 78)
 texture = ExtResource("2_rcm7m")
 
+[node name="Button" type="Button" parent="HBoxContainer/AttackButton"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="BlockButton" type="Sprite2D" parent="HBoxContainer"]
 position = Vector2(576, 78)
 texture = ExtResource("2_rcm7m")
 
+[node name="Button" type="Button" parent="HBoxContainer/BlockButton"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="ChargeButton" type="Sprite2D" parent="HBoxContainer"]
 position = Vector2(424, 78)
 texture = ExtResource("2_rcm7m")
+
+[node name="Button" type="Button" parent="HBoxContainer/ChargeButton"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartGameButton" type="Button" parent="CenterContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Start Game"
+
+[node name="GameOverText" type="Label" parent="CenterContainer"]
+visible = false
+layout_mode = 2
+text = "Game Over! You won!"
+
+[node name="GameTimer" type="Timer" parent="."]
+process_mode = 1
+
+[connection signal="pressed" from="HBoxContainer/AttackButton/Button" to="." method="_on_attack_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/BlockButton/Button" to="." method="_on_block_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/ChargeButton/Button" to="." method="_on_charge_button_pressed"]
+[connection signal="pressed" from="CenterContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="ready" from="GameTimer" to="." method="_on_game_timer_ready"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
