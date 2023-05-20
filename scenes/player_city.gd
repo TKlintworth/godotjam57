@@ -4,6 +4,7 @@ class_name PlayerCity
 
 @onready var health = $Health
 @onready var heal_timer = $HealTimer
+@onready var sprite_frames = $PlayerCitySprite
 
 @export var heal_time = 5
 @export var heal_value = 5
@@ -18,6 +19,9 @@ signal player_heal(heal_value)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	heal_timer.wait_time = heal_time
+	sprite_frames.play("levels")
+	sprite_frames.pause()
+	sprite_frames.set_frame_and_progress(0, 0)
 	#heal_timer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,6 +34,9 @@ func apply_damage(attack: Attack):
 	print("in player city apply damage")
 
 func _on_player_city_destroyed():
+	heal_timer.stop()
+	sprite_frames.play("destroy")
+	health.visible = false
 	emit_signal("player_city_destroyed")
 
 func _on_heal_timer_timeout():

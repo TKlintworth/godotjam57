@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var hud = get_node("HUD")
 @export var game_length_in_seconds : int = 10 # 6000 = 10 minutes
+@export var Player : CharacterBody2D 
+@export var PlayerCity : Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,6 +12,8 @@ func _ready():
 	
 	#hud.start_game_timer()
 	
+func test():
+	print("test")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

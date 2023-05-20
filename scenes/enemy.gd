@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name Enemy
+class_name Settler
 
 @onready var EnemySprite = $EnemySprite
 @onready var EnemyArea = $EnemyArea
@@ -14,8 +14,11 @@ class_name Enemy
 @export var speed = 0.2
 @export var attackDamage = 10
 @export var attackTime = 1.5
-@export var PlayerCity : Node2D
-@export var Player : CharacterBody2D
+#@export var PlayerCity : Node2D
+#@export var Player : CharacterBody2D
+#@export var Player = preload("res://scenes/player.tscn")
+var PlayerCity = null
+var Player = null
 
 enum states { ATTACK, MOVE, FLEE, IDLE }
 var enemyState = states.MOVE
@@ -28,6 +31,14 @@ var targetVector = Vector2(0,0)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("enemy created")
+	main.test()
+	#print("main city: ", main.PlayerCity)
+	#print("main player: ", main.Player)
+	PlayerCity = %PlayerCity
+	Player = %Player
+	if(PlayerCity or Player == null):
+		PlayerCity = get_parent().find_child("PlayerCity")
+		Player = get_parent().find_child("Player")
 	print("target: ", PlayerCity)
 	AttackTimer.wait_time = attackTime
 
@@ -49,7 +60,7 @@ func _process(delta):
 			if(is_instance_valid(PlayerCity)):
 				targetVector = (PlayerCity.position - position).normalized()
 			else:
-				currentTarget == "Player"
+				currentTarget = "Player"
 		position += targetVector * speed
 		if(!EnemySprite.is_playing()):
 			EnemySprite.play("enemy_walk")
@@ -65,6 +76,9 @@ func change_state(newState):
 		enemyState = states.FLEE
 	else:
 		enemyState = states.IDLE
+
+func set_pos(newPos):
+	position = newPos
 
 func attack():
 	if(!attackCooldownActive):
@@ -130,10 +144,6 @@ func _on_enemy_area_body_entered(body):
 		playerInAttackRange = true
 		print("enemy within range of Player")
 		change_state(0)
-
-
-
-
 
 func _on_health_dead():
 	queue_free()

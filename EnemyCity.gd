@@ -4,13 +4,15 @@ extends Node2D
 @onready var level_up_timer = $LevelUpTimer
 @onready var enemy_city_sprite_frames = $EnemyCitySpriteFrames
 @onready var health_component = $Health
+@onready var enemy = preload("res://scenes/enemy.tscn")
+#@onready var settler = preload("")
 
 @export var spawn_time = 10
 @export var level_up_time = 60
 @export var settler_spawn_chance = 0.25
 @export var currentLevel = 1
 
-var isActive = false 
+@export var isActive = false 
 var isDestroyed = false
 var maxLevel = 3
 
@@ -22,13 +24,44 @@ func apply_damage(damage):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if(isDestroyed):
+		enemy_city_sprite_frames.play("destroy")
+		isActive = false
 	spawn_timer.wait_time = spawn_time
 	level_up_timer.wait_time = level_up_time
+	randomize()
 
+func level_up():
+	if(currentLevel + 1 >= maxLevel):
+		currentLevel = maxLevel
+	else:
+		currentLevel += 1
+	print("new city level: " + str(currentLevel))
+
+func spawn():
+	var new_enemy 
+	print("spawning")
+	if(randf_range(0.0, 1.0) < settler_spawn_chance):
+		#new_enemy = 
+		print("Spawn Settler")
+	else:
+		new_enemy = enemy.instantiate()
+		new_enemy.set_pos(position)
+		get_parent().add_child(new_enemy)
+		#add_child(new_enemy) # Move outside the else once settlers are created
+	# Create a new instance of an Enemy on the city
+	# Chance to create an instance of Settler
+	
+	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if(isActive):
+		if(spawn_timer.is_stopped()):
+			spawn_timer.start()
+		if(level_up_timer.is_stopped()):
+			level_up_timer.start()
 
 
 func _on_health_dead():
@@ -39,3 +72,13 @@ func _on_health_dead():
 	level_up_timer.stop()
 	health_component.visible = false
 	enemy_city_sprite_frames.play("destroy")
+
+
+func _on_level_up_timer_timeout():
+	if(isActive):
+		level_up()
+
+
+func _on_spawn_timer_timeout():
+	if(isActive):
+		spawn()

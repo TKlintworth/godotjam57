@@ -61,4 +61,6 @@ position = Vector2(-26, 23)
 scale = Vector2(3, 1.04)
 max_health = 150
 
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="LevelUpTimer" to="." method="_on_level_up_timer_timeout"]
 [connection signal="dead" from="Health" to="." method="_on_health_dead"]
