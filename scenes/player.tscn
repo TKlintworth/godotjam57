@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://ccf48470vagbm"]
+[gd_scene load_steps=28 format=3 uid="uid://ccf48470vagbm"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_t6goj"]
 [ext_resource type="Texture2D" uid="uid://daqhgxoneojqd" path="res://assets/sprites/player_attack.png" id="2_r2fxs"]
 [ext_resource type="Texture2D" uid="uid://dxpwtnwxjkpkm" path="res://assets/sprites/player_walk.png" id="3_2siep"]
+[ext_resource type="Texture2D" uid="uid://uiuwsfmu5dia" path="res://assets/sprites/player_idle_45x38.png" id="3_kqbpb"]
 [ext_resource type="PackedScene" uid="uid://bjylum348rl4h" path="res://scenes/health.tscn" id="4_tfvk5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vpli7"]
@@ -36,13 +37,21 @@ region = Rect2(225, 0, 45, 38)
 atlas = ExtResource("2_r2fxs")
 region = Rect2(270, 0, 45, 38)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bof1f"]
-atlas = ExtResource("3_2siep")
+[sub_resource type="AtlasTexture" id="AtlasTexture_clvli"]
+atlas = ExtResource("3_kqbpb")
 region = Rect2(0, 0, 45, 38)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3eg7h"]
-atlas = ExtResource("3_2siep")
+[sub_resource type="AtlasTexture" id="AtlasTexture_8own1"]
+atlas = ExtResource("3_kqbpb")
 region = Rect2(45, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4x8gg"]
+atlas = ExtResource("3_kqbpb")
+region = Rect2(90, 0, 45, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xacc1"]
+atlas = ExtResource("3_kqbpb")
+region = Rect2(135, 0, 45, 38)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fmnn3"]
 atlas = ExtResource("3_2siep")
@@ -106,14 +115,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bof1f")
+"texture": SubResource("AtlasTexture_clvli")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3eg7h")
+"texture": SubResource("AtlasTexture_8own1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x8gg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xacc1")
 }],
 "loop": false,
 "name": &"player_idle",
-"speed": 3.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -155,10 +170,12 @@ script = ExtResource("1_t6goj")
 shape = SubResource("CircleShape2D_vpli7")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+z_index = 5
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_4l5vr")
-animation = &"player_attack"
-frame = 6
+animation = &"player_idle"
+frame = 3
+frame_progress = 1.0
 flip_h = true
 
 [node name="PlayerAttackBox" type="Area2D" parent="PlayerSprite"]
@@ -178,6 +195,7 @@ shape = SubResource("CapsuleShape2D_5bl76")
 disabled = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
+z_index = 5
 zoom = Vector2(3.25, 3.25)
 
 [node name="Health" parent="." instance=ExtResource("4_tfvk5")]

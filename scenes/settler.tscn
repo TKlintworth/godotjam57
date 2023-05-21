@@ -1,5 +1,54 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgc1afnvlmpme"]
+[gd_scene load_steps=8 format=3 uid="uid://21y4n86vsaeu"]
 
-[ext_resource type="PackedScene" uid="uid://2ssi5a7shh8x" path="res://scenes/enemy.tscn" id="1_gkqr4"]
+[ext_resource type="Script" path="res://scenes/settler.gd" id="1_ygra2"]
+[ext_resource type="Texture2D" uid="uid://dcj2rqj478nbp" path="res://assets/sprites/settler_44x26.png" id="2_ht8qr"]
+[ext_resource type="PackedScene" uid="uid://bjylum348rl4h" path="res://scenes/health.tscn" id="4_7bnqh"]
 
-[node name="Enemy" instance=ExtResource("1_gkqr4")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi3y2"]
+atlas = ExtResource("2_ht8qr")
+region = Rect2(0, 0, 44, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d3c16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi3y2")
+}],
+"loop": false,
+"name": &"enemy_walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eijy1"]
+radius = 17.593
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l3qsf"]
+radius = 20.0
+
+[node name="Enemy" type="Node2D"]
+position = Vector2(110, 62)
+script = ExtResource("1_ygra2")
+
+[node name="EnemySprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_d3c16")
+animation = &"enemy_walk"
+
+[node name="DetectionArea" type="Area2D" parent="EnemySprite"]
+
+[node name="DetectionAreaCollisionBox" type="CollisionShape2D" parent="EnemySprite/DetectionArea"]
+scale = Vector2(5.17297, -4.30917)
+shape = SubResource("CircleShape2D_eijy1")
+
+[node name="EnemyArea" type="Area2D" parent="." groups=["hurtbox"]]
+
+[node name="EnemyCollisionBox" type="CollisionShape2D" parent="EnemyArea" groups=["hurtbox"]]
+shape = SubResource("CircleShape2D_l3qsf")
+
+[node name="Health" parent="." instance=ExtResource("4_7bnqh")]
+position = Vector2(-9, -20)
+
+[connection signal="body_entered" from="EnemySprite/DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="EnemySprite/DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="area_entered" from="EnemyArea" to="." method="_on_enemy_area_area_entered"]
+[connection signal="dead" from="Health" to="." method="_on_health_dead"]

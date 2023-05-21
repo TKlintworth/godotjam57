@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name Settler
+class_name Enemy
 
 @onready var EnemySprite = $EnemySprite
 @onready var EnemyArea = $EnemyArea
@@ -51,6 +51,7 @@ func apply_damage(damage):
 func _process(delta):
 	if(enemyState == 0):
 		attack()
+		
 		#position += Vector2(1,1) * speed 
 	elif(enemyState == 1):
 		#if(is_instance_valid(PlayerCity)):
@@ -92,11 +93,22 @@ func attack():
 					if(is_instance_valid(Player)):
 						Player.health_component.damage(newAttack)
 				print("enemy dealing damage")
+				EnemySprite.play("enemy_attack")
 				attackCooldownActive = true
 				AttackTimer.start(attackTime)
 		
 	
-		#print("waitingd")
+func _on_enemy_area_body_entered(body):
+	if(body is Player):
+		playerInAttackRange = true
+		print("enemy within range of Player")
+		change_state(0)
+		
+func _on_enemy_area_body_exited(body):
+	if(body is Player):
+		playerInAttackRange = false
+		print("enemy not within range of Player")
+		change_state(1)
 
 func _on_detection_area_body_entered(body):
 	print("body entered detection radius of enemy")
@@ -108,8 +120,6 @@ func _on_detection_area_body_exited(body):
 	if(body is Player):
 		currentTarget = "PlayerCity"
 	
-
-
 func _on_enemy_area_area_entered(area):
 	print("area entered enemy area")
 	print(area.owner)
@@ -119,7 +129,6 @@ func _on_enemy_area_area_entered(area):
 			print("enemy within range of PlayerCity")
 			change_state(0)
 	#print(area.get_parent())
-
 
 func _on_enemy_area_area_exited(area):
 	if(area.is_in_group("hurtbox")):
@@ -139,11 +148,10 @@ func _on_attack_timer_timeout():
 	attackCooldownActive = false
 
 
-func _on_enemy_area_body_entered(body):
-	if(body is Player):
-		playerInAttackRange = true
-		print("enemy within range of Player")
-		change_state(0)
+
 
 func _on_health_dead():
 	queue_free()
+
+
+

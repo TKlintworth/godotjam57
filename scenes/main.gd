@@ -4,6 +4,7 @@ extends Node2D
 @export var game_length_in_seconds : int = 10 # 6000 = 10 minutes
 @export var Player : CharacterBody2D 
 @export var PlayerCity : Node2D
+var available_cities = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +16,18 @@ func _ready():
 func test():
 	print("test")
 
+func get_available_cities():
+	var cities = get_tree().get_nodes_in_group("city")
+	for city in cities:
+		if(!city.get_isActive()):
+			available_cities.append(city)
+	return available_cities
+
+func update_available_cities(city):
+	if(city in available_cities):
+		available_cities.erase(city)
+	else:
+		available_cities.append(city)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

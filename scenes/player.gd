@@ -26,6 +26,7 @@ var charge_cooldown = 10
 signal player_dead
 
 var attack_animation_playing = false
+var attack_target 
 
 
 # Called when the node enters the scene tree for the first time.
@@ -68,14 +69,16 @@ func _physics_process(_delta):
 
 
 func _on_player_sprite_animation_finished():
-	print("finished")
+	#print("finished")
 	if(player_sprite.animation == "player_attack"):
 		attack_animation_playing = false
-	print(player_sprite.animation)
+		#attack_target = false
+	#print(player_sprite.animation)
 
 
 func _on_player_attack_box_area_entered(area):
-	if(!(area.owner is PlayerCity)):
+	if(!(area.owner is PlayerCity)): #and !attack_target):
+		#attack_target = true
 		if(area.is_in_group("hurtbox")):
 			area.get_parent().apply_damage(50)
 		#if(area.is_in_group("hurtbox")):
@@ -84,7 +87,7 @@ func _on_player_attack_box_area_entered(area):
 
 
 func _on_player_city_player_heal(heal_value):
-	print("player healing")
+	#print("player healing")
 	health_component.heal(heal_value)
 
 

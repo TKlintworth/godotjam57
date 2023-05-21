@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwt8dtpyms8ni"]
+[gd_scene load_steps=10 format=3 uid="uid://cwt8dtpyms8ni"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_45pjf"]
 [ext_resource type="PackedScene" uid="uid://cujmpnoevmsww" path="res://scenes/hud.tscn" id="2_17vk3"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://2ssi5a7shh8x" path="res://scenes/enemy.tscn" id="5_67u1y"]
 [ext_resource type="PackedScene" uid="uid://dn23ewdkpgrb0" path="res://scenes/player_city.tscn" id="6_lsadw"]
 [ext_resource type="PackedScene" uid="uid://dj1menmgufjgr" path="res://scenes/enemy_city.tscn" id="7_57t1n"]
+[ext_resource type="PackedScene" uid="uid://21y4n86vsaeu" path="res://scenes/settler.tscn" id="8_im38l"]
+[ext_resource type="Script" path="res://scenes/AudioManager.gd" id="8_u1uq1"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("Player", "PlayerCity")]
 script = ExtResource("1_45pjf")
@@ -35,7 +37,6 @@ heal_value = 10
 [node name="EnemyCity" parent="." instance=ExtResource("7_57t1n")]
 position = Vector2(232, 256)
 level_up_time = 10
-isActive = true
 
 [node name="EnemyCity2" parent="." instance=ExtResource("7_57t1n")]
 position = Vector2(280, 80)
@@ -60,6 +61,12 @@ level_up_time = 10
 [node name="EnemyCity7" parent="." instance=ExtResource("7_57t1n")]
 position = Vector2(200, 592)
 level_up_time = 10
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("8_u1uq1")
+
+[node name="Settler" parent="." instance=ExtResource("8_im38l")]
+position = Vector2(472, 112)
 
 [connection signal="game_timer_timeout" from="HUD" to="." method="_on_hud_game_timer_timeout"]
 [connection signal="start_game_pressed" from="HUD" to="." method="_on_hud_start_game_pressed"]
