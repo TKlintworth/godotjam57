@@ -2,7 +2,11 @@
 
 importer="wav"
 type="AudioStreamWAV"
+<<<<<<< Updated upstream
 uid="uid://cr7f21bhswa7e"
+=======
+uid="uid://dgdjt0nko40sx"
+>>>>>>> Stashed changes
 path="res://.godot/imported/feudal_final.wav-3bfe3cdbc9939672470d80c6c2f1a5c0.sample"
 
 [deps]

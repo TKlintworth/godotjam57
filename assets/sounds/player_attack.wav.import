@@ -2,7 +2,11 @@
 
 importer="wav"
 type="AudioStreamWAV"
+<<<<<<< Updated upstream
 uid="uid://cdew4q0nhc7ox"
+=======
+uid="uid://dj2ompeyfhybf"
+>>>>>>> Stashed changes
 path="res://.godot/imported/player_attack.wav-5a4382f572e3a509cfe5c3dd2d247268.sample"
 
 [deps]
