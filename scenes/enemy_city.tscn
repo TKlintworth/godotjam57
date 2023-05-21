@@ -1,12 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://dj1menmgufjgr"]
+[gd_scene load_steps=10 format=3 uid="uid://dj1menmgufjgr"]
 
 [ext_resource type="Script" path="res://EnemyCity.gd" id="1_cbj5d"]
 [ext_resource type="Texture2D" uid="uid://dyty5blga2fna" path="res://assets/sprites/base_t1_enemy_75x102.png" id="2_hp7ex"]
+[ext_resource type="Texture2D" uid="uid://rdufin0tw53r" path="res://assets/sprites/ruin_75x43.png" id="2_qd6fc"]
 [ext_resource type="Texture2D" uid="uid://cpwdyeto35qt5" path="res://assets/sprites/base_t2_enemy_79x105.png" id="3_ekw14"]
 [ext_resource type="Texture2D" uid="uid://dmg66n4y6ggkk" path="res://assets/sprites/base_t3_enemy_79x115.png" id="4_we0rr"]
+[ext_resource type="PackedScene" uid="uid://bjylum348rl4h" path="res://scenes/health.tscn" id="6_r7vfr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujp4w"]
+size = Vector2(83, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhprn"]
+atlas = ExtResource("2_qd6fc")
+region = Rect2(0, 0, 75, 43)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0wb53"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhprn")
+}],
+"loop": false,
+"name": &"destroy",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_hp7ex")
@@ -18,25 +35,32 @@ animations = [{
 "texture": ExtResource("4_we0rr")
 }],
 "loop": false,
-"name": &"default",
+"name": &"levels",
 "speed": 1.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujp4w"]
-size = Vector2(83, 72)
 
 [node name="EnemyCity" type="Node2D"]
 script = ExtResource("1_cbj5d")
 
-[node name="EnemyCitySpriteFrames" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_0wb53")
+[node name="EnemyCityCollisionBox" type="Area2D" parent="." groups=["hurtbox"]]
 
-[node name="EnemyCityCollisionBox" type="Area2D" parent="EnemyCitySpriteFrames"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCitySpriteFrames/EnemyCityCollisionBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCityCollisionBox" groups=["hurtbox"]]
 position = Vector2(0.5, -14)
 shape = SubResource("RectangleShape2D_ujp4w")
+
+[node name="EnemyCitySpriteFrames" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0wb53")
+animation = &"levels"
 
 [node name="SpawnTimer" type="Timer" parent="."]
 
 [node name="LevelUpTimer" type="Timer" parent="."]
+
+[node name="Health" parent="." instance=ExtResource("6_r7vfr")]
+position = Vector2(-26, 23)
+scale = Vector2(3, 1.04)
+max_health = 150
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="LevelUpTimer" to="." method="_on_level_up_timer_timeout"]
+[connection signal="dead" from="Health" to="." method="_on_health_dead"]

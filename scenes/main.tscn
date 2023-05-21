@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cwt8dtpyms8ni"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_c6ctr"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_45pjf"]
 [ext_resource type="PackedScene" uid="uid://cujmpnoevmsww" path="res://scenes/hud.tscn" id="2_17vk3"]
 [ext_resource type="PackedScene" uid="uid://dbolelolv8154" path="res://scenes/world.tscn" id="3_6ai0o"]
 [ext_resource type="PackedScene" uid="uid://ccf48470vagbm" path="res://scenes/player.tscn" id="4_cwdue"]
@@ -8,23 +8,62 @@
 [ext_resource type="PackedScene" uid="uid://dn23ewdkpgrb0" path="res://scenes/player_city.tscn" id="6_lsadw"]
 [ext_resource type="PackedScene" uid="uid://dj1menmgufjgr" path="res://scenes/enemy_city.tscn" id="7_57t1n"]
 
-[node name="Main" type="Node2D"]
-script = ExtResource("1_c6ctr")
+[node name="Main" type="Node2D" node_paths=PackedStringArray("Player", "PlayerCity")]
+script = ExtResource("1_45pjf")
+Player = NodePath("Player")
+PlayerCity = NodePath("PlayerCity")
 
 [node name="HUD" parent="." instance=ExtResource("2_17vk3")]
 
 [node name="World" parent="." instance=ExtResource("3_6ai0o")]
 
 [node name="Player" parent="." instance=ExtResource("4_cwdue")]
+unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(560, 152)
+speed = 100
 
 [node name="Enemy" parent="." instance=ExtResource("5_67u1y")]
 z_index = 10
 position = Vector2(408, 72)
 
 [node name="PlayerCity" parent="." instance=ExtResource("6_lsadw")]
+unique_name_in_owner = true
 position = Vector2(504, 280)
+heal_value = 10
 
 [node name="EnemyCity" parent="." instance=ExtResource("7_57t1n")]
-position = Vector2(80, 208)
+position = Vector2(232, 256)
+level_up_time = 10
+isActive = true
+
+[node name="EnemyCity2" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(280, 80)
+level_up_time = 10
+
+[node name="EnemyCity3" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(680, 72)
+level_up_time = 10
+
+[node name="EnemyCity4" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1080, 136)
+level_up_time = 10
+
+[node name="EnemyCity5" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1080, 416)
+level_up_time = 10
+
+[node name="EnemyCity6" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(792, 560)
+level_up_time = 10
+
+[node name="EnemyCity7" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(200, 592)
+level_up_time = 10
+
+[connection signal="game_timer_timeout" from="HUD" to="." method="_on_hud_game_timer_timeout"]
+[connection signal="start_game_pressed" from="HUD" to="." method="_on_hud_start_game_pressed"]
+[connection signal="player_dead" from="Player" to="." method="_on_player_player_dead"]
+[connection signal="player_city_destroyed" from="PlayerCity" to="." method="_on_player_city_destroyed"]
+[connection signal="player_city_took_damage" from="PlayerCity" to="HUD" method="_on_player_city_player_city_took_damage"]
+[connection signal="player_heal" from="PlayerCity" to="Player" method="_on_player_city_player_heal"]
