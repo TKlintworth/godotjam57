@@ -37,6 +37,7 @@ heal_value = 10
 [node name="EnemyCity" parent="." instance=ExtResource("7_57t1n")]
 position = Vector2(232, 256)
 level_up_time = 10
+isActive = true
 
 [node name="EnemyCity2" parent="." instance=ExtResource("7_57t1n")]
 position = Vector2(280, 80)
