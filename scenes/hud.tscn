@@ -40,6 +40,7 @@ position = Vector2(48, 56)
 texture = ExtResource("3_i4tbk")
 
 [node name="PlayerCityHealthBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 16.0
 offset_right = 83.0
