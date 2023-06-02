@@ -40,6 +40,7 @@ animations = [{
 }]
 
 [node name="EnemyCity" type="Node2D" groups=["city"]]
+z_index = 4
 script = ExtResource("1_cbj5d")
 
 [node name="EnemyCityCollisionBox" type="Area2D" parent="." groups=["hurtbox"]]

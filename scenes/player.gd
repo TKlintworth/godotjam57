@@ -10,6 +10,8 @@ class_name Player
 var attack_cooldown = 1
 var block_cooldown = 5
 var charge_cooldown = 10
+var fog_state = "fog_draw"
+var fog_state_options = ["fog_draw", "fog_erase"]
 
 @onready var player_camera = $PlayerCamera
 #@onready var health_bar = $PlayerHealthBar
@@ -29,18 +31,23 @@ var attack_animation_playing = false
 var attack_target 
 
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	main._on_hud_start_game_pressed()
 	pass # Replace with function body.
 
 func attack(attack: Attack):
 	player_sprite.play("player_attack")
+	AudioManager.play("res://assets/sounds/player_attack.wav")
 	attack_animation_playing = true
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
 	#print(velocity)
+
 	if(Input.is_action_just_pressed("player_attack")):
 		var new_attack = Attack.new()
 		new_attack.attack_damage = attack_damage

@@ -83,6 +83,7 @@ func _on_health_dead():
 	# Set to destroyed, stop timers, set to inactive, set sprite animation to destroyed, hide healthbar
 	isDestroyed = true
 	isActive = false
+	AudioManager.play("res://assets/sounds/crumble.wav")
 	spawn_timer.stop()
 	level_up_timer.stop()
 	health_component.visible = false

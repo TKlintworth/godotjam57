@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var StartButton = $CenterContainer/StartGameButton
 @onready var PlayerCityHealthBar = $Control/PlayerCityHealthBar
 @onready var GameOverText = $CenterContainer/GameOverText
+@onready var PauseMenu = $CenterContainer2
 
 var time_remaining = 0;
 
@@ -18,6 +19,7 @@ signal charge_button_pressed
 func _ready():
 	TimerText.text = format_time(GameTimer.wait_time)
 	time_remaining = GameTimer.wait_time
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -26,6 +28,11 @@ func _process(delta):
 	var formatted_time_remaining = format_time(GameTimer.time_left)
 	TimerText.text = formatted_time_remaining
 	#print(GameTimer.time_left)
+	if(Input.is_action_just_pressed("ui_cancel")):
+		if(get_tree().paused):
+			main.unpause()
+		else:
+			main.pause()
 	
 func set_game_timer(time):
 	time_remaining = time
@@ -61,7 +68,7 @@ func _on_game_timer_timeout():
 
 
 func _on_start_game_button_pressed():
-	StartButton.visible = false
+	#StartButton.visible = false
 	emit_signal("start_game_pressed")
 
 
@@ -80,4 +87,17 @@ func _on_charge_button_pressed():
 func _on_player_city_player_city_took_damage(damage):
 	print("player city took damage hud")
 	PlayerCityHealthBar.value -= damage
-	
+
+func set_pause_menu_visibility(visiblity):
+	PauseMenu.visible = visiblity
+
+func _on_resume_button_pressed():
+	main.unpause()
+
+
+func _on_exit_to_desktop_button_pressed():
+	get_tree().quit()
+
+
+func _on_ready():
+	emit_signal("start_game_pressed")

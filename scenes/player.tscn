@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_t6goj"]
 [ext_resource type="Texture2D" uid="uid://daqhgxoneojqd" path="res://assets/sprites/player_attack.png" id="2_r2fxs"]
 [ext_resource type="Texture2D" uid="uid://dxpwtnwxjkpkm" path="res://assets/sprites/player_walk.png" id="3_2siep"]
-[ext_resource type="Texture2D" uid="uid://ct6aobe6d433y" path="res://assets/sprites/player_idle_45x38.png" id="3_kqbpb"]
+[ext_resource type="Texture2D" uid="uid://uiuwsfmu5dia" path="res://assets/sprites/player_idle_45x38.png" id="3_kqbpb"]
 [ext_resource type="PackedScene" uid="uid://bjylum348rl4h" path="res://scenes/health.tscn" id="4_tfvk5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vpli7"]

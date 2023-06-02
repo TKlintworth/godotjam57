@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://deftmjenrt1wm" path="res://assets/sprites/healthbar_red_18x2.png" id="3_nk4eb"]
 
 [node name="Health" type="Node2D"]
+z_index = 5
 script = ExtResource("1_sl2tl")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]

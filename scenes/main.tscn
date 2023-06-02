@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cwt8dtpyms8ni"]
+[gd_scene load_steps=9 format=3 uid="uid://cwt8dtpyms8ni"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_45pjf"]
 [ext_resource type="PackedScene" uid="uid://cujmpnoevmsww" path="res://scenes/hud.tscn" id="2_17vk3"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dn23ewdkpgrb0" path="res://scenes/player_city.tscn" id="6_lsadw"]
 [ext_resource type="PackedScene" uid="uid://dj1menmgufjgr" path="res://scenes/enemy_city.tscn" id="7_57t1n"]
 [ext_resource type="PackedScene" uid="uid://21y4n86vsaeu" path="res://scenes/settler.tscn" id="8_im38l"]
-[ext_resource type="Script" path="res://scenes/AudioManager.gd" id="8_u1uq1"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("Player", "PlayerCity")]
 script = ExtResource("1_45pjf")
@@ -16,28 +15,57 @@ Player = NodePath("Player")
 PlayerCity = NodePath("PlayerCity")
 
 [node name="HUD" parent="." instance=ExtResource("2_17vk3")]
+process_mode = 3
 
 [node name="World" parent="." instance=ExtResource("3_6ai0o")]
 
 [node name="Player" parent="." instance=ExtResource("4_cwdue")]
 unique_name_in_owner = true
 texture_filter = 1
-position = Vector2(560, 152)
+position = Vector2(448, 288)
 speed = 100
 
 [node name="Enemy" parent="." instance=ExtResource("5_67u1y")]
 z_index = 10
-position = Vector2(408, 72)
+position = Vector2(304, 272)
 
 [node name="PlayerCity" parent="." instance=ExtResource("6_lsadw")]
 unique_name_in_owner = true
 position = Vector2(504, 280)
 heal_value = 10
+metadata/_edit_lock_ = true
 
 [node name="EnemyCity" parent="." instance=ExtResource("7_57t1n")]
-position = Vector2(232, 256)
+position = Vector2(176, 288)
 level_up_time = 10
 isActive = true
+
+[node name="EnemyCity8" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(56, 56)
+level_up_time = 10
+isActive = true
+
+[node name="EnemyCity9" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(464, 56)
+level_up_time = 10
+
+[node name="EnemyCity10" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(952, 72)
+level_up_time = 10
+isActive = true
+
+[node name="EnemyCity11" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1096, 272)
+level_up_time = 10
+
+[node name="EnemyCity12" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(536, 584)
+level_up_time = 10
+isActive = true
+
+[node name="EnemyCity13" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(0, 424)
+level_up_time = 10
 
 [node name="EnemyCity2" parent="." instance=ExtResource("7_57t1n")]
 position = Vector2(280, 80)
@@ -63,12 +91,334 @@ level_up_time = 10
 position = Vector2(200, 592)
 level_up_time = 10
 
-[node name="AudioManager" type="Node" parent="."]
-script = ExtResource("8_u1uq1")
+[node name="EnemyCity14" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(272, 592)
+level_up_time = 10
+
+[node name="EnemyCity15" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(392, 592)
+level_up_time = 10
+
+[node name="EnemyCity16" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(32, 592)
+level_up_time = 10
+
+[node name="EnemyCity17" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(64, 512)
+level_up_time = 10
+
+[node name="EnemyCity18" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-80, 600)
+level_up_time = 10
+
+[node name="EnemyCity19" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-80, 520)
+level_up_time = 10
+
+[node name="EnemyCity20" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-96, 440)
+level_up_time = 10
+
+[node name="EnemyCity21" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-104, 360)
+level_up_time = 10
+
+[node name="EnemyCity22" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-104, 288)
+level_up_time = 10
+
+[node name="EnemyCity23" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-104, 208)
+level_up_time = 10
+
+[node name="EnemyCity24" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-104, 136)
+level_up_time = 10
+
+[node name="EnemyCity25" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-104, 56)
+level_up_time = 10
+
+[node name="EnemyCity26" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-104, -24)
+level_up_time = 10
+
+[node name="EnemyCity27" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-16, -24)
+level_up_time = 10
+
+[node name="EnemyCity28" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(72, -24)
+level_up_time = 10
+
+[node name="EnemyCity29" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(168, -24)
+level_up_time = 10
+
+[node name="EnemyCity30" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(144, 64)
+level_up_time = 10
+
+[node name="EnemyCity32" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(384, -32)
+level_up_time = 10
+
+[node name="EnemyCity33" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(472, -32)
+level_up_time = 10
+
+[node name="EnemyCity34" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(568, -32)
+level_up_time = 10
+
+[node name="EnemyCity35" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(664, -32)
+level_up_time = 10
+
+[node name="EnemyCity36" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(760, -32)
+level_up_time = 10
+
+[node name="EnemyCity37" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(848, -32)
+level_up_time = 10
+
+[node name="EnemyCity38" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(936, -32)
+level_up_time = 10
+
+[node name="EnemyCity39" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1024, -32)
+level_up_time = 10
+
+[node name="EnemyCity40" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1024, 40)
+level_up_time = 10
+
+[node name="EnemyCity41" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1128, -32)
+level_up_time = 10
+
+[node name="EnemyCity42" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1128, 48)
+level_up_time = 10
+
+[node name="EnemyCity43" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1168, 136)
+level_up_time = 10
+
+[node name="EnemyCity44" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1168, 216)
+level_up_time = 10
+
+[node name="EnemyCity45" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1168, 296)
+level_up_time = 10
+
+[node name="EnemyCity46" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(904, 160)
+level_up_time = 10
+
+[node name="EnemyCity47" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(816, 160)
+level_up_time = 10
+
+[node name="EnemyCity48" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(776, 56)
+level_up_time = 10
+
+[node name="EnemyCity49" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(856, 64)
+level_up_time = 10
+
+[node name="EnemyCity50" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(816, 248)
+level_up_time = 10
+
+[node name="EnemyCity51" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(904, 248)
+level_up_time = 10
+
+[node name="EnemyCity52" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(816, 336)
+level_up_time = 10
+
+[node name="EnemyCity53" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(904, 336)
+level_up_time = 10
+
+[node name="EnemyCity54" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(904, 336)
+level_up_time = 10
+
+[node name="EnemyCity55" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1000, 304)
+level_up_time = 10
+
+[node name="EnemyCity56" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1168, 384)
+level_up_time = 10
+
+[node name="EnemyCity57" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(824, 424)
+level_up_time = 10
+
+[node name="EnemyCity58" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(712, 208)
+level_up_time = 10
+
+[node name="EnemyCity59" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(712, 296)
+level_up_time = 10
+
+[node name="EnemyCity60" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(712, 376)
+level_up_time = 10
+
+[node name="EnemyCity61" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(712, 456)
+level_up_time = 10
+
+[node name="EnemyCity62" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(704, 544)
+level_up_time = 10
+
+[node name="EnemyCity63" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(704, 632)
+level_up_time = 10
+
+[node name="EnemyCity64" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(912, 456)
+level_up_time = 10
+
+[node name="EnemyCity65" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1000, 472)
+level_up_time = 10
+
+[node name="EnemyCity66" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1144, 504)
+level_up_time = 10
+
+[node name="EnemyCity67" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1168, 600)
+level_up_time = 10
+
+[node name="EnemyCity68" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(1072, 640)
+level_up_time = 10
+
+[node name="EnemyCity69" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(976, 640)
+level_up_time = 10
+
+[node name="EnemyCity70" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(800, 640)
+level_up_time = 10
+
+[node name="EnemyCity72" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(904, 552)
+level_up_time = 10
+
+[node name="EnemyCity73" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(608, 640)
+level_up_time = 10
+
+[node name="EnemyCity74" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(472, 656)
+level_up_time = 10
+
+[node name="EnemyCity75" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(120, 648)
+level_up_time = 10
+
+[node name="EnemyCity76" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(160, 512)
+level_up_time = 10
+
+[node name="EnemyCity77" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(248, 512)
+level_up_time = 10
+
+[node name="EnemyCity78" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(344, 512)
+level_up_time = 10
+
+[node name="EnemyCity79" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(200, 432)
+level_up_time = 10
+
+[node name="EnemyCity80" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(288, 432)
+level_up_time = 10
+
+[node name="EnemyCity81" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(88, 224)
+level_up_time = 10
+
+[node name="EnemyCity82" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-8, 216)
+level_up_time = 10
+
+[node name="EnemyCity83" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(96, 296)
+level_up_time = 10
+
+[node name="EnemyCity84" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(384, 432)
+level_up_time = 10
+
+[node name="EnemyCity85" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(320, 168)
+level_up_time = 10
+
+[node name="EnemyCity86" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(200, 160)
+level_up_time = 10
+
+[node name="EnemyCity87" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(576, 72)
+level_up_time = 10
+
+[node name="EnemyCity88" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(376, 80)
+level_up_time = 10
+
+[node name="EnemyCity89" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(-24, 56)
+level_up_time = 10
+
+[node name="EnemyCity90" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(104, 432)
+level_up_time = 10
+
+[node name="EnemyCity91" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(624, 456)
+level_up_time = 10
+
+[node name="EnemyCity92" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(288, 352)
+level_up_time = 10
+
+[node name="EnemyCity93" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(200, 352)
+level_up_time = 10
+
+[node name="EnemyCity94" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(296, 256)
+level_up_time = 10
+
+[node name="EnemyCity71" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(888, 640)
+level_up_time = 10
+
+[node name="EnemyCity31" parent="." instance=ExtResource("7_57t1n")]
+position = Vector2(296, -32)
+level_up_time = 10
 
 [node name="Settler" parent="." instance=ExtResource("8_im38l")]
-position = Vector2(472, 112)
+position = Vector2(264, 256)
 
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="game_timer_timeout" from="HUD" to="." method="_on_hud_game_timer_timeout"]
 [connection signal="start_game_pressed" from="HUD" to="." method="_on_hud_start_game_pressed"]
 [connection signal="player_dead" from="Player" to="." method="_on_player_player_dead"]

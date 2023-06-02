@@ -116,6 +116,7 @@ radius = 17.593
 radius = 20.0
 
 [node name="Enemy" type="Node2D"]
+z_index = 4
 position = Vector2(110, 62)
 script = ExtResource("1_uo80s")
 

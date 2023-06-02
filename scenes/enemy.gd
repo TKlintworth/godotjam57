@@ -94,6 +94,7 @@ func attack():
 						Player.health_component.damage(newAttack)
 				print("enemy dealing damage")
 				EnemySprite.play("enemy_attack")
+				AudioManager.play("res://assets/sounds/enemy_attack.wav")
 				attackCooldownActive = true
 				AttackTimer.start(attackTime)
 		

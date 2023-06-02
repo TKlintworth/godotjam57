@@ -40,6 +40,7 @@ position = Vector2(48, 56)
 texture = ExtResource("3_i4tbk")
 
 [node name="PlayerCityHealthBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 16.0
 offset_right = 83.0
@@ -75,6 +76,7 @@ grow_vertical = 0
 alignment = 1
 
 [node name="AttackButton" type="Sprite2D" parent="HBoxContainer"]
+visible = false
 position = Vector2(728, 78)
 texture = ExtResource("2_rcm7m")
 
@@ -91,6 +93,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BlockButton" type="Sprite2D" parent="HBoxContainer"]
+visible = false
 position = Vector2(576, 78)
 texture = ExtResource("2_rcm7m")
 
@@ -107,6 +110,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ChargeButton" type="Sprite2D" parent="HBoxContainer"]
+visible = false
 position = Vector2(424, 78)
 texture = ExtResource("2_rcm7m")
 
@@ -130,6 +134,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StartGameButton" type="Button" parent="CenterContainer"]
+process_mode = 3
+visible = false
 texture_filter = 1
 layout_mode = 2
 text = "Start Game"
@@ -142,9 +148,38 @@ text = "Game Over! You won!"
 [node name="GameTimer" type="Timer" parent="."]
 process_mode = 1
 
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+process_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CenterContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2/Panel"]
+layout_mode = 2
+offset_left = -64.0
+offset_top = -33.0
+offset_right = 64.0
+offset_bottom = 33.0
+
+[node name="ResumeButton" type="Button" parent="CenterContainer2/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="ExitToDesktopButton" type="Button" parent="CenterContainer2/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Exit To Desktop"
+
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="HBoxContainer/AttackButton/Button" to="." method="_on_attack_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/BlockButton/Button" to="." method="_on_block_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/ChargeButton/Button" to="." method="_on_charge_button_pressed"]
 [connection signal="pressed" from="CenterContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="ready" from="GameTimer" to="." method="_on_game_timer_ready"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="pressed" from="CenterContainer2/Panel/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CenterContainer2/Panel/VBoxContainer/ExitToDesktopButton" to="." method="_on_exit_to_desktop_button_pressed"]

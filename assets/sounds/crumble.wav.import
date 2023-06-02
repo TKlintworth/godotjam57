@@ -2,11 +2,7 @@
 
 importer="wav"
 type="AudioStreamWAV"
-<<<<<<< Updated upstream
-uid="uid://cdo214sdl7arg"
-=======
 uid="uid://t7lwxwlhgn4f"
->>>>>>> Stashed changes
 path="res://.godot/imported/crumble.wav-4af5b5c3b2ced3e394b1908bd01993cc.sample"
 
 [deps]

@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnrok87n544b5"]
+
+[sub_resource type="GDScript" id="GDScript_0r10c"]
+script/source = "extends Node2D
+
+var background = Image.new()
+var fog = Image.new()
+var light = Image.new()
+
+func _ready():
+	background.load()
+
+
+
+#const LightTexture = preload(\"res://assets/sprites/fog_White_74x69.png\")
+#const GRID_SIZE = 16
+#
+#@onready var fog = $Fog
+#
+#var display_width = ProjectSettings.get_setting(\"display/window/size/viewport_width\")
+#var display_height = ProjectSettings.get_setting(\"display/window/size/viewport_height\")
+#
+#var fogImage = Image.new()
+#var fogTexture = ImageTexture.new()
+#var lightImage = LightTexture.get_image()
+#var light_offset = Vector2(LightTexture.get_width() / 2, LightTexture.get_height() / 2)
+#
+#func _ready():
+#	print(display_height)
+#	print(display_width)
+#	var fog_image_width = int(display_width / GRID_SIZE)
+#	var fog_image_height = int(display_height / GRID_SIZE)
+#	fogImage.create(fog_image_width, fog_image_height, false, Image.FORMAT_RGBA8)
+#	fogImage.fill(Color8(0, 0, 0, 0))
+#
+#	lightImage.convert(Image.FORMAT_RGBA8)
+#	fog.scale *= GRID_SIZE
+#
+#func update_fog(new_grid_position):
+#	var light_rect = Rect2(Vector2.ZERO, Vector2(lightImage.get_width(), lightImage.get_height()))
+#	fogImage.blend_rect(lightImage, light_rect, new_grid_position - light_offset)
+#	update_fog_image_texture()
+#
+#func update_fog_image_texture():
+#	fogTexture.create_from_image(fogImage)
+#	fog.texture = fogTexture
+#
+#func _input(event):
+#
+#	update_fog(get_local_mouse_position() / GRID_SIZE)
+
+"
+
+[node name="Node" type="Node2D"]
+script = SubResource("GDScript_0r10c")
+
+[node name="Fog" type="Sprite2D" parent="."]
+centered = false
