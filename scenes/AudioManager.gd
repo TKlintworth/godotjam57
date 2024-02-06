@@ -16,16 +16,19 @@ func _ready():
 		add_child(p)
 		available.append(p)
 		#p.connect("finished", _on_stream_finished)
-		p.finished.connect(_on_stream_finished)
+		#p.finished.connect(_on_stream_finished)
+		
+		p.connect("finished", Callable(self, "_on_stream_finished"))
 
 		p.bus = bus
 
 
-func _on_stream_finished(stream):
-	print(stream)
+func _on_stream_finished():
+	print("STREAM FINISHED")
+	available.append(AudioStreamPlayer.new())
+	print("Stream finished. Available players:", available.size())
 	# When finished playing a stream, make the player available again.
 	#emit_signal("stream_finished", [stream])
-	available.append(stream)
 
 
 func play(sound_path):

@@ -1,9 +1,12 @@
 extends Node2D
 
 @onready var hud = $HUD
+@onready var overlay_rect = $OverlayRect
+@onready var overlay_viewport = $OverlayViewport
 @export var game_length_in_seconds : int = 300 # 6000 = 10 minutes
 @export var Player : CharacterBody2D 
 @export var PlayerCity : Node2D
+
 var available_cities = []
 
 # Called when the node enters the scene tree for the first time.
@@ -12,7 +15,31 @@ func _ready():
 	if($"/root/Main/HUD"):
 		print($"/root/Main/HUD")
 	#hud.start_game_timer()
-	
+	# Assuming $OverlayViewport is your drawing viewport and $Overlay is the TextureRect for displaying the trail
+	if(overlay_rect):
+		# Create a new Image
+		# Ensure the image is created and filled correctly
+		var image = Image.create(512, 512, false, Image.FORMAT_RGBA8)
+
+		# Fill the image with a completely transparent color
+		image.fill(Color.TRANSPARENT)
+
+		# Create an ImageTexture from the Image
+		var texture = ImageTexture.new()
+		texture.create_from_image(image)
+
+		# Assign the ImageTexture to the TextureRect
+		var texture_rect = $OverlayViewport/TextureRect
+		texture_rect.texture = texture
+			
+			
+		var overlay_viewport = $OverlayViewport
+		overlay_viewport.CLEAR_MODE_NEVER
+		var viewport_texture = overlay_viewport.get_texture()
+		#viewport_texture.viewport_path = $OverlayViewport
+		var overlay_texture_rect = $OverlayRect  # This TextureRect should be outside the OverlayViewport, positioned to overlay the scene
+		overlay_texture_rect.texture = viewport_texture
+
 func pause():
 	$"/root/Main/HUD".find_child("CenterContainer2").visible = true
 	get_tree().paused = true
@@ -27,7 +54,6 @@ func toggle_pause():
 		$"/root/Main/HUD".find_child("CenterContainer2").visible = true
 	else:
 		$"/root/Main/HUD".find_child("CenterContainer2").visible = false
-
 
 func test():
 	print("test")
@@ -47,7 +73,13 @@ func update_available_cities(city):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if(Player):
+		#overlay_sprite.material.set_shader_parameter("character_pos", Player.position)
+		#overlay_sprite.material.set_shader_parameter("radius", 10)
+		$OverlayViewport/TextureRect.material.set_shader_parameter("character_pos", Player.position)
+		$OverlayViewport/TextureRect.material.set_shader_parameter("radius", 10)
+		#overlay_rect.material.set_shader_parameter("character_pos", Player.position)
+		#overlay_rect.material.set_shader_parameter("radius", 10)
 	
 func game_over(status):
 	print("game has ended")
