@@ -22,6 +22,7 @@ PlayerCity = NodePath("PlayerCity")
 
 [node name="OverlayViewport" type="SubViewport" parent="."]
 render_target_clear_mode = 1
+render_target_update_mode = 4
 
 [node name="TextureRect" type="TextureRect" parent="OverlayViewport"]
 material = SubResource("ShaderMaterial_6t81v")
