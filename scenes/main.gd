@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var hud = $HUD
 @onready var overlay_rect = $OverlayRect
-@onready var overlay_viewport = $OverlayViewport
+#@onready var overlay_viewport = $SubViewportContainer/OverlayViewport
 @export var game_length_in_seconds : int = 300 # 6000 = 10 minutes
 @export var Player : CharacterBody2D 
 @export var PlayerCity : Node2D
@@ -29,16 +29,16 @@ func _ready():
 		texture.create_from_image(image)
 
 		# Assign the ImageTexture to the TextureRect
-		var texture_rect = $OverlayViewport/TextureRect
+		var texture_rect = $SubViewportContainer/OverlayViewport/TextureRect
 		texture_rect.texture = texture
 			
 			
-		var overlay_viewport = $OverlayViewport
+		var overlay_viewport = $SubViewportContainer/OverlayViewport
 		overlay_viewport.CLEAR_MODE_NEVER
 		var viewport_texture = overlay_viewport.get_texture()
 		#viewport_texture.viewport_path = $OverlayViewport
 		var overlay_texture_rect = $OverlayRect  # This TextureRect should be outside the OverlayViewport, positioned to overlay the scene
-		overlay_texture_rect.texture = viewport_texture
+		#overlay_texture_rect.texture = viewport_texture
 
 func pause():
 	$"/root/Main/HUD".find_child("CenterContainer2").visible = true
@@ -76,8 +76,10 @@ func _process(delta):
 	if(Player):
 		#overlay_sprite.material.set_shader_parameter("character_pos", Player.position)
 		#overlay_sprite.material.set_shader_parameter("radius", 10)
-		$OverlayViewport/TextureRect.material.set_shader_parameter("character_pos", Player.position)
-		$OverlayViewport/TextureRect.material.set_shader_parameter("radius", 10)
+		$SubViewportContainer/OverlayViewport/TextureRect.material.set_shader_parameter("character_pos", Player.position)
+		print($SubViewportContainer/OverlayViewport/TextureRect.material.get_shader_parameter("character_pos"))
+		$SubViewportContainer/OverlayViewport/TextureRect.material.set_shader_parameter("radius", 10)
+		print($SubViewportContainer/OverlayViewport/TextureRect.material.get_shader_parameter("radius"))
 		#overlay_rect.material.set_shader_parameter("character_pos", Player.position)
 		#overlay_rect.material.set_shader_parameter("radius", 10)
 	
