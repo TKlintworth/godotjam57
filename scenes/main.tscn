@@ -10,10 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://dj1menmgufjgr" path="res://scenes/enemy_city.tscn" id="7_57t1n"]
 [ext_resource type="PackedScene" uid="uid://21y4n86vsaeu" path="res://scenes/settler.tscn" id="8_im38l"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6t81v"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4g5pm"]
 shader = ExtResource("2_ov4kd")
-shader_parameter/character_pos = Vector2(0, 0)
-shader_parameter/radius = 1.0
+shader_parameter/character_pos = null
+shader_parameter/radius = null
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("Player", "PlayerCity")]
 script = ExtResource("1_45pjf")
@@ -22,29 +22,47 @@ PlayerCity = NodePath("PlayerCity")
 
 [node name="OverlayRect" type="TextureRect" parent="."]
 z_index = 4000
-offset_left = -96.0
-offset_top = -168.0
-offset_right = 1344.0
-offset_bottom = 912.0
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-z_index = 4000
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -80.0
+offset_right = 1224.0
+offset_bottom = 712.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="OverlayViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_clear_mode = 1
-render_target_update_mode = 0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+z_index = 4000
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.994326
+anchor_bottom = 0.990141
+offset_right = -0.192139
+offset_bottom = -0.192017
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/OverlayViewport"]
-z_index = 4096
-material = SubResource("ShaderMaterial_6t81v")
+[node name="OverlayViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+handle_input_locally = false
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/SubViewportContainer/OverlayViewport"]
+material = SubResource("ShaderMaterial_4g5pm")
 offset_right = 40.0
 offset_bottom = 40.0
 

@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var hud = $HUD
-@onready var overlay_rect = $OverlayRect
+@onready var hud
+@onready var overlay_rect
 #@onready var overlay_viewport = $SubViewportContainer/OverlayViewport
 @export var game_length_in_seconds : int = 300 # 6000 = 10 minutes
 @export var Player : CharacterBody2D 
@@ -15,36 +15,29 @@ func _ready():
 	if($"/root/Main/HUD"):
 		print($"/root/Main/HUD")
 	#hud.start_game_timer()
+	hud = $HUD
+	overlay_rect = $OverlayRect
 	# Assuming $OverlayViewport is your drawing viewport and $Overlay is the TextureRect for displaying the trail
 	if(overlay_rect):
 		print("Inside overlay rect setting")
-		# Create a new Image
-		# Ensure the image is created and filled correctly
-
 		var image = Image.create(512, 512, false, Image.FORMAT_RGBA8)
-		#image.fill(Color.BLACK)
-		#image.set_pixel(100, 100, Color.DARK_RED)
-
 		# Fill the image with a completely transparent color
 		image.fill(Color.TRANSPARENT)
-
 		# Create an ImageTexture from the Image
 		var texture = ImageTexture.new()
 		$OverlayRect.texture = texture.create_from_image(image)
 		texture = $OverlayRect.texture
-		print("Inside texture + ", $OverlayRect.texture)
-
 		# Assign the ImageTexture to the TextureRect
-		var texture_rect = $SubViewportContainer/OverlayViewport/TextureRect
-		texture_rect.texture = texture
-		var overlay_viewport = $SubViewportContainer/OverlayViewport
+		var texture_rect = $Control/SubViewportContainer/OverlayViewport/TextureRect
+		var image2 = Image.create(512, 512, false, Image.FORMAT_RGBA8)
+		# Fill the image with a completely transparent color
+		image2.fill(Color.RED)
+		$Control/SubViewportContainer/OverlayViewport/TextureRect.texture = ImageTexture.new().create_from_image(image2)
+		var overlay_viewport = $Control/SubViewportContainer/OverlayViewport
 		overlay_viewport.CLEAR_MODE_NEVER
 		var viewport_texture = overlay_viewport.get_texture()
-		# Comment
-		#viewport_texture.viewport_path = $OverlayViewport
-		var overlay_texture_rect = $OverlayRect  # This TextureRect should be outside the OverlayViewport, positioned to overlay the scene
-		# Comment
-		#overlay_texture_rect.texture = viewport_texture
+		viewport_texture.viewport_path = "SubViewportContainer/OverlayViewport"
+		$OverlayRect.texture = viewport_texture
 
 func pause():
 	$"/root/Main/HUD".find_child("CenterContainer2").visible = true
@@ -82,12 +75,14 @@ func _process(delta):
 	if(Player):
 		#overlay_sprite.material.set_shader_parameter("character_pos", Player.position)
 		#overlay_sprite.material.set_shader_parameter("radius", 10)
-		$SubViewportContainer/OverlayViewport/TextureRect.material.set_shader_parameter("character_pos", Player.position)
-		print($SubViewportContainer/OverlayViewport/TextureRect.material.get_shader_parameter("character_pos"))
-		$SubViewportContainer/OverlayViewport/TextureRect.material.set_shader_parameter("radius", 10)
-		print($SubViewportContainer/OverlayViewport/TextureRect.material.get_shader_parameter("radius"))
+		
+		$Control/SubViewportContainer/OverlayViewport/TextureRect.material.set_shader_parameter("character_pos", Player.position)
+		#print($SubViewportContainer/OverlayViewport/TextureRect.material.get_shader_parameter("character_pos"))
+		$Control/SubViewportContainer/OverlayViewport/TextureRect.material.set_shader_parameter("radius", 100)
+		#print($SubViewportContainer/OverlayViewport/TextureRect.material.get_shader_parameter("radius"))
+		
 		#overlay_rect.material.set_shader_parameter("character_pos", Player.position)
-		#overlay_rect.material.set_shader_parameter("radius", 10)
+		#overlay_rect.material.set_shader_parameter("radius", 100)
 	
 func game_over(status):
 	print("game has ended")
